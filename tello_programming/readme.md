@@ -7,7 +7,7 @@ As I do not own a Tello yet, I will run my code on DroneBlocks simulation.
 The files in this repo describe the topic as:
 | S.No | Topic | Description |
 | --- | --- | --- |
-| 1 | Basics | What is a drone? <br/> Components of a drone. <br/> How does a drone fly? <br/> Basic setup and installations. |
+| 1 | Basics | What is a drone? Components of a drone. How does a drone fly? Basic setup and installations. |
 | 2 | Basic Movements | - |
 | 3 | Image Capture | - |
 | 4 | Keyboard Control | - |
