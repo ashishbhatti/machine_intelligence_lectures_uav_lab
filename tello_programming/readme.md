@@ -8,7 +8,7 @@ The files in this repo describe the topic as:
 | S.No | Topic | Description |
 | --- | --- | --- |
 | 1 | Basics | What is a drone? Components of a drone. How does a drone fly? Basic setup and installations. |
-| 2 | Basic Movements | - |
+| 2 | Basic Movements | How to make tello move? Both by giving distance directly and by giving speed. |
 | 3 | Image Capture | - |
 | 4 | Keyboard Control | - |
 | 5 | Project 1: Surviellance | - |
