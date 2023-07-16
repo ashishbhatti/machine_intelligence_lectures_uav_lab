@@ -9,7 +9,7 @@ The files in this repo describe the topic as:
 | --- | --- | --- |
 | 1 | Basics | What is a drone? Components of a drone. How does a drone fly? Basic setup and installations. |
 | 2 | Basic Movements | How to make tello move? Both by giving distance directly and by giving speed. |
-| 3 | Image Capture | - |
+| 3 | Image Capture | How to capture images and videos from tello camera? |
 | 4 | Keyboard Control | - |
 | 5 | Project 1: Surviellance | - |
 | 6 | Project 2: Mapping | - |
