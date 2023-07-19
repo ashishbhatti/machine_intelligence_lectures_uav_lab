@@ -1,12 +1,16 @@
-
+# combining the Image Capture and Keyboard Control 
 from djitellopy import tello
 import KeyPressModule as kp
-from time import sleep
+import time
+import cv2
 
 kp.init()
 me = tello.Tello()
 me.connect()
 print(me.get_battery())
+global img
+
+me.streamon()
 
 def getKeyboardInput():
     # defining params left-right, forward-backward, up-down, yaw-velocity
@@ -25,8 +29,11 @@ def getKeyboardInput():
     if kp.getKey("a"): yv = speed
     elif kp.getKey("d"): yv = -speed
 
-    if kp.getKey("q"): me.land()
+    if kp.getKey("q"): me.land(); time.sleep(3)
     if kp.getKey("e"): me.takeoff()
+
+    if kp.getKey("z"):
+        cv2.imwrite(f'Reources/Images/{time.time()}.jpg',img)
     
     return [lr, fb, ud, yv]
 
@@ -35,4 +42,8 @@ def getKeyboardInput():
 while True:
     vals = getKeyboardInput()
     me.send_rc_control(vals[0], vals[1], vals[2], vals[3])
-    print(kp.getKey("s"))
+    img = me.get_frame_read().frame
+    img = cv2.resize(img, (360,240))        # keeping size small for faster computation
+    cv2.imshow("Image", img)
+
+    cv2.waitKey(1) 
