@@ -34,6 +34,7 @@ def getKeyboardInput():
 
     if kp.getKey("z"):
         cv2.imwrite(f'Reources/Images/{time.time()}.jpg',img)
+        time.sleep(0.3)            # so only one image is captured
     
     return [lr, fb, ud, yv]
 
