@@ -24,6 +24,8 @@ have intermediate positions.
 from djitellopy import tello
 import KeyPressModule as kp
 from time import sleep
+import numpy as np
+import cv2
 
 # --------- Initialization --------
 kp.init()
@@ -31,13 +33,13 @@ me = tello.Tello()
 me.connect()
 print(me.get_battery())
 
-# ------- Parameters ------------
+# ------- Parameters --------------
 fSpeed = 117/10              # Forward Speed in cm/sec (actual speed was 15 cm/s)
 aSpeed = 360/10              # Angular Speed Degrees/s
 interval = 0.25              # time interval to calculate
 
-dInterval = fSpeed * interval
-aInterval = aSpeed * interval
+dInterval = fSpeed * interval           # distance in one time unit (interval above)
+aInterval = aSpeed * interval           # angle in one time unit
 
 
 
@@ -63,10 +65,14 @@ def getKeyboardInput():
     
     return [lr, fb, ud, yv]
 
-
+def drawPoints():
+    cv2.circle(img, (300,500), 5, (0,0,255), cv2.FILLED)
 
 while True:
     vals = getKeyboardInput()
     me.send_rc_control(vals[0], vals[1], vals[2], vals[3])
-    print(kp.getKey("s"))
-    sleep(0.05)
+
+    img = np.zeros((1000,1000,3), np.uint8)
+    drawPoints()
+    cv2.imshow("Output", img)
+    cv2.waitKey(1)
