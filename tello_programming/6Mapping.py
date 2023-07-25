@@ -32,6 +32,10 @@ kp.init()
 me = tello.Tello()
 me.connect()
 print(me.get_battery())
+x,y = 500,500
+a = 0          # angle
+yaw = 0
+
 
 # ------- Parameters --------------
 fSpeed = 117/10              # Forward Speed in cm/sec (actual speed was 15 cm/s)
@@ -47,18 +51,37 @@ def getKeyboardInput():
     # defining params left-right, forward-backward, up-down, yaw-velocity
     lr, fb, ud, yv  = 0, 0, 0, 0
     speed = 50
+    d = 0
+    global yaw
 
-    if kp.getKey("LEFT"): lr = -speed
-    elif kp.getKey("RIGHT"): lr = speed
+    if kp.getKey("LEFT"):
+        lr = -speed
+        d = dInterval
+        a = -180
+    elif kp.getKey("RIGHT"): 
+        lr = speed
+        d = -dInterval
+        a = 180
 
-    if kp.getKey("UP"): fb = speed
-    elif kp.getKey("DOWN"): fb = -speed
+    if kp.getKey("UP"): 
+        fb = speed
+        d = dInterval
+        a = 270
+    elif kp.getKey("DOWN"): 
+        fb = -speed
+        d = -dInterval
+        a = -90
 
     if kp.getKey("w"): ud = speed
     elif kp.getKey("s"): ud = -speed
     
-    if kp.getKey("a"): yv = speed
-    elif kp.getKey("d"): yv = -speed
+    if kp.getKey("a"): 
+        yv = -speed
+        yaw += aInterval
+    elif kp.getKey("d"): 
+        yv = speed
+        yaw -= aInterval
+
 
     if kp.getKey("q"): me.land()
     if kp.getKey("e"): me.takeoff()
@@ -66,7 +89,7 @@ def getKeyboardInput():
     return [lr, fb, ud, yv]
 
 def drawPoints():
-    cv2.circle(img, (300,500), 5, (0,0,255), cv2.FILLED)
+    cv2.circle(img, (x,y), 5, (0,0,255), cv2.FILLED)
 
 while True:
     vals = getKeyboardInput()
