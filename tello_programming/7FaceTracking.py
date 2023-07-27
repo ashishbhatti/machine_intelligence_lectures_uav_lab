@@ -24,6 +24,17 @@ which are not relatable by default.
 import cv2
 import numpy as np
 
+# detecting the face first
+def findFace(img):
+    """
+    Finds faces in an image using the method proposed 
+    by Viola-Jones. Famous method aka Haar-Cascades. It 
+    uses a file which has all the parameters and information
+    of the model, and helps us detect obejcts.
+    """
+    
+
+
 # running the webcam for now
 cap = cv2.VideoCapture(0)
 
