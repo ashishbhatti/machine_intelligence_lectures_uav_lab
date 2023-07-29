@@ -46,12 +46,13 @@ interval = 0.25              # time interval to calculate
 dInterval = fSpeed * interval           # distance in one time unit (interval above)
 aInterval = aSpeed * interval           # angle in one time unit
 
-points = []
+points = [(0,0),(0,0)]
 
 def getKeyboardInput():
     # defining params left-right, forward-backward, up-down, yaw-velocity
     lr, fb, ud, yv  = 0, 0, 0, 0
     speed = 15
+    aSpeed = 50
     d = 0
     global x,y,yaw, a
 
@@ -77,10 +78,10 @@ def getKeyboardInput():
     elif kp.getKey("s"): ud = -speed
     
     if kp.getKey("a"): 
-        yv = -speed
+        yv = -aSpeed
         yaw -= aInterval
     elif kp.getKey("d"): 
-        yv = speed
+        yv = aSpeed
         yaw += aInterval
 
 
@@ -97,16 +98,24 @@ def getKeyboardInput():
 
 def drawPoints(img, points):
     for point in points:
+        # marking the previous points on the image
         cv2.circle(img, point, 5, (0,0,255), cv2.FILLED)
-    cv2.putText(img, f'({points[-1][0] - 500/100}, {points[-1][1] - 500/100})m',
-        (points[-1][0]+10, points[-1][1] + 30))
+
+    # marking the last location of drone
+    cv2.circle(img, points[-1], 8, (0,255,0), cv2.FILLED)
+
+    # Printing point coordinates on the image
+    cv2.putText(img, f'({(points[-1][0] - 500)/100}, {(points[-1][1] - 500)/100})m',
+        (points[-1][0]+10, points[-1][1] + 30), cv2.FONT_HERSHEY_PLAIN, 1,
+        (255,0,255), 1)
 
 while True:
     vals = getKeyboardInput()
     me.send_rc_control(vals[0], vals[1], vals[2], vals[3])
 
     img = np.zeros((1000,1000,3), np.uint8)
-    points.append((vals[4], vals[5]))
+    if (points[-1][0] != vals[4] or points[-1][1] != vals[5]):
+        points.append((vals[4], vals[5]))
     drawPoints(img, points)
     cv2.imshow("Output", img)
     cv2.waitKey(1)
