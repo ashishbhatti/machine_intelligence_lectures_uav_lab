@@ -20,3 +20,14 @@ This method is known as PID. It is a linear controller.
 Using PID you can relate two different entities together 
 which are not relatable by default.
 '''
+
+import cv2
+import numpy as np
+
+# running the webcam for now
+cap = cv2.VideoCapture(0)
+
+while True:
+    _, img = cap.read()
+    cv2.imshow("Output", img)
+    cv2.waitKey(1)
