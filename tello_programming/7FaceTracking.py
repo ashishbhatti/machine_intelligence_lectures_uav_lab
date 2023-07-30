@@ -32,7 +32,7 @@ def findFace(img):
     uses a file which has all the parameters and information
     of the model, and helps us detect obejcts.
     """
-    
+    faceCascade = cv2.CascadeClassifier("Resources/")
 
 
 # running the webcam for now
