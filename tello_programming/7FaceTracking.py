@@ -24,6 +24,9 @@ which are not relatable by default.
 import cv2
 import numpy as np
 
+# range for forward and backward control
+fbRange = [6200, 6800]
+
 # detecting the face first
 def findFace(img):
     """
@@ -54,6 +57,29 @@ def findFace(img):
         return img, [myFaceListC[i], myFaceListArea[i]]
     else:
         return img, [[0,0], 0]
+
+
+
+def trackFace(me, info, w, pid, pError):
+    """
+    This function implements the high-level control.
+    So the drone moves forward or backward, depending on 
+    the area of the bounding box.
+    Also the drone rotates, depending on the position of 
+    obejct in the frame.
+    """
+    area = info[1]
+
+    
+    # forward-backward movement control
+    if area > fbRange[0] and area < fbRange[1]:
+        fb = 0
+    elif area > fbRange[1]:
+        fb = -20
+    elif area < fbRange[0] and area != 0:
+        fb = 20
+
+
 
 
 # running the webcam for now
