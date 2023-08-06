@@ -24,8 +24,11 @@ which are not relatable by default.
 import cv2
 import numpy as np
 
+w,h = 360, 240
 # range for forward and backward control
 fbRange = [6200, 6800]
+pid = [0.4, 0.4, 0]          # p, d, and i
+pError = 0
 
 # detecting the face first
 def findFace(img):
@@ -66,9 +69,21 @@ def trackFace(me, info, w, pid, pError):
     So the drone moves forward or backward, depending on 
     the area of the bounding box.
     Also the drone rotates, depending on the position of 
-    obejct in the frame.
+    object in the frame.
+    Args:
+        me: Tello drone object
+        info: the center and bbox area of object
+        w: width of the image
+
+
     """
     area = info[1]
+    x, y = info[0]
+
+    error = x - w // 2
+    speed = pid[0]*error + pid[1]*(error - pError)
+    speed = int(np.clip(speed, -100, 100))          
+    # clipping between -100, 100 to use for yaw
 
     
     # forward-backward movement control
@@ -79,6 +94,9 @@ def trackFace(me, info, w, pid, pError):
     elif area < fbRange[0] and area != 0:
         fb = 20
 
+    me.send_rc_control(0, fb, 0, speed)
+    return error
+
 
 
 
@@ -87,7 +105,9 @@ cap = cv2.VideoCapture(0)
 
 while True:
     _, img = cap.read()
+    img = cv2.resize(img, (w,h))
     img, info = findFace(img)
+    pError = trackFace(me, info, w, pid, pError)
     print("Center:", info[0], " Area:", info[1])
     cv2.imshow("Output", img)
     cv2.waitKey(1)
