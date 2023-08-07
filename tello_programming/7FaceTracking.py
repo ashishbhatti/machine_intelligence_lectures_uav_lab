@@ -94,6 +94,10 @@ def trackFace(me, info, w, pid, pError):
     elif area < fbRange[0] and area != 0:
         fb = 20
 
+    if x == 0:
+        speed = 0
+        error = 0 
+
     me.send_rc_control(0, fb, 0, speed)
     return error
 
