@@ -63,7 +63,8 @@ def findFace(img):
 
 
 
-def trackFace(me, info, w, pid, pError):
+# def trackFace(me, info, w, pid, pError):
+def trackFace(info, w, pid, pError):
     """
     This function implements the high-level control.
     So the drone moves forward or backward, depending on 
@@ -79,6 +80,7 @@ def trackFace(me, info, w, pid, pError):
     """
     area = info[1]
     x, y = info[0]
+    fb = 0
 
     error = x - w // 2
     speed = pid[0]*error + pid[1]*(error - pError)
@@ -98,7 +100,9 @@ def trackFace(me, info, w, pid, pError):
         speed = 0
         error = 0 
 
-    me.send_rc_control(0, fb, 0, speed)
+    print("Error: ",error, " FB: ", fb)
+
+    # me.send_rc_control(0, fb, 0, speed)
     return error
 
 
@@ -111,7 +115,8 @@ while True:
     _, img = cap.read()
     img = cv2.resize(img, (w,h))
     img, info = findFace(img)
-    pError = trackFace(me, info, w, pid, pError)
-    print("Center:", info[0], " Area:", info[1])
+    # pError = trackFace(me, info, w, pid, pError)
+    pError = trackFace(info, w, pid, pError)
+    # print("Center:", info[0], " Area:", info[1])
     cv2.imshow("Output", img)
     cv2.waitKey(1)
