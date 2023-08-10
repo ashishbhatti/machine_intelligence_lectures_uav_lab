@@ -100,7 +100,7 @@ def trackFace(info, w, pid, pError):
         speed = 0
         error = 0 
 
-    print("Error: ",error, " FB: ", fb)
+    print("Speed: ",speed, " FB: ", fb)
 
     # me.send_rc_control(0, fb, 0, speed)
     return error
