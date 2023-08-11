@@ -26,17 +26,16 @@ import numpy as np
 from djitellopy import tello
 
 me = tello.Tello()
-me.connect()              # this takes care of ip connections and communication
+me.connect()                                               # takes care of ip connections, communication
 print(me.get_battery())
 
-# Image capture
-me.streamon()
+me.streamon()                                              # image capture from tello drone
 
 w,h = 360, 240
-# range for forward and backward control
-fbRange = [6200, 6800]
-pid = [0.4, 0.4, 0]          # p, d, and i
+fbRange = [6200, 6800]                                     # forward, backward range for control
+pid = [0.4, 0.4, 0]                                        # p, d, and i values
 pError = 0
+
 
 # detecting the face first
 def findFace(img):
@@ -45,14 +44,17 @@ def findFace(img):
     by Viola-Jones. Famous method aka Haar-Cascades. It 
     uses a file which has all the parameters and information
     of the model, and helps us detect obejcts.
+
+    Args:
+        img: image in which faces need to be detected
     """
     faceCascade = cv2.CascadeClassifier("Resources/haarcascade_frontalface_default.xml")
     imgGray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     faces = faceCascade.detectMultiScale(imgGray, 1.2, 8)
     # change scale factor and nearest neighbours for good results
 
-    myFaceListC = []                  # to store center points
-    myFaceListArea = []              # to store area
+    myFaceListC = []                                       # to store center points
+    myFaceListArea = []                                    # to store area
     
     for (x,y,w,h) in faces:
         cv2.rectangle(img, (x,y), (x+w, y+h), (0,0,255), 2)
@@ -70,7 +72,6 @@ def findFace(img):
         return img, [[0,0], 0]
 
 
-
 # def trackFace(me, info, w, pid, pError):
 def trackFace(info, w, pid, pError):
     """
@@ -84,8 +85,12 @@ def trackFace(info, w, pid, pError):
         me: Tello drone object
         info: the center and bbox area of object
         w: width of the image
+        pid: list of pid values in order of pdi
+        pError: previous error value for pid, global variable
 
-
+    Returns:
+        error: current error, to be stored as pError for next 
+        iteration.
     """
     area = info[1]
     x, y = info[0]
@@ -93,9 +98,7 @@ def trackFace(info, w, pid, pError):
 
     error = x - w // 2
     speed = pid[0]*error + pid[1]*(error - pError)
-    speed = int(np.clip(speed, -100, 100))          
-    # clipping between -100, 100 to use for yaw
-
+    speed = int(np.clip(speed, -100, 100))                 # contraining yaw speed between -100, 100
     
     # forward-backward movement control
     if area > fbRange[0] and area < fbRange[1]:
@@ -110,19 +113,16 @@ def trackFace(info, w, pid, pError):
         error = 0 
 
     print("Speed: ",speed, " FB: ", fb)
-
     me.send_rc_control(0, fb, 0, speed)
     return error
 
 
+# --------------------------------------- main ----------------------------------------------------
 
-
-# running the webcam for now
-cap = cv2.VideoCapture(0)
-
+# cap = cv2.VideoCapture(0)                                  # if testing with webcam
 while True:
-    # _, img = cap.read()                               # reading from webcam
-    img = me.get_frame_read().frame                   # reading from tello camera
+    # _, img = cap.read()                                    # reading from webcam
+    img = me.get_frame_read().frame                        # reading from tello camera
     img = cv2.resize(img, (w,h))
     img, info = findFace(img)
     # pError = trackFace(me, info, w, pid, pError)
