@@ -71,6 +71,7 @@ def trackFace(info, w, pid, pError):
     the area of the bounding box.
     Also the drone rotates, depending on the position of 
     object in the frame.
+    
     Args:
         me: Tello drone object
         info: the center and bbox area of object
