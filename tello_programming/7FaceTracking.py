@@ -23,6 +23,14 @@ which are not relatable by default.
 
 import cv2
 import numpy as np
+from djitellopy import tello
+
+me = tello.Tello()
+me.connect()              # this takes care of ip connections and communication
+print(me.get_battery())
+
+# Image capture
+me.streamon()
 
 w,h = 360, 240
 # range for forward and backward control
@@ -103,7 +111,7 @@ def trackFace(info, w, pid, pError):
 
     print("Speed: ",speed, " FB: ", fb)
 
-    # me.send_rc_control(0, fb, 0, speed)
+    me.send_rc_control(0, fb, 0, speed)
     return error
 
 
@@ -113,7 +121,8 @@ def trackFace(info, w, pid, pError):
 cap = cv2.VideoCapture(0)
 
 while True:
-    _, img = cap.read()
+    # _, img = cap.read()                               # reading from webcam
+    img = me.get_frame_read().frame                   # reading from tello camera
     img = cv2.resize(img, (w,h))
     img, info = findFace(img)
     # pError = trackFace(me, info, w, pid, pError)
