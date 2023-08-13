@@ -24,12 +24,17 @@ which are not relatable by default.
 import cv2
 import numpy as np
 from djitellopy import tello
+import time
 
 me = tello.Tello()
 me.connect()                                               # takes care of ip connections, communication
 print(me.get_battery())
 
 me.streamon()                                              # image capture from tello drone
+me.takeoff()
+me.send_rc_control(0, 0, 25, 0)
+time.sleep(2.2)
+
 
 w,h = 360, 240
 fbRange = [6200, 6800]                                     # forward, backward range for control
@@ -112,7 +117,7 @@ def trackFace(info, w, pid, pError):
         speed = 0
         error = 0 
 
-    print("Speed: ",speed, " FB: ", fb)
+    # print("Speed: ",speed, " FB: ", fb)
     me.send_rc_control(0, fb, 0, speed)
     return error
 
@@ -129,4 +134,6 @@ while True:
     pError = trackFace(info, w, pid, pError)
     # print("Center:", info[0], " Area:", info[1])
     cv2.imshow("Output", img)
-    cv2.waitKey(1)
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        me.land()
+        break
