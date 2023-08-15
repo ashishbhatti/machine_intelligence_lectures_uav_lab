@@ -11,8 +11,8 @@ The files in this repo describe the topic as:
 | 2 | Basic Movements | How to make tello move? Both by giving distance directly and by giving speed. |
 | 3 | Image Capture | How to capture images and videos from tello camera? |
 | 4 | Keyboard Control | Control your Tello using Keyboard. |
-| 5 | Project 1: Surviellance | - |
-| 6 | Project 2: Mapping | - |
-| 7 | Project 3: Face Tracking | - |
+| 5 | Project 1: Photo Capture Drone | Fly Tello using keyboard and capture a picture. |
+| 6 | Project 2: Localization | Find the position and heading of your Tello wrt the starting position. |
+| 7 | Project 3: Face Tracking | Follow a particular face in front of the camera. |
 | 8 | Project 4: Line Following | - |
 
