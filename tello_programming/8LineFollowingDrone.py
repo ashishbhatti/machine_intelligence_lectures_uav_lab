@@ -1,5 +1,5 @@
 '''
-In this project we are going to create a line following drone.
+In this project we are going to create a line following drone. 
 The idea of Line Following Drone, comes from line follower robot.
 We will see how line follower robot works and how to implement 
 same methodology in the drone. 
@@ -19,6 +19,22 @@ We have 2^3 = 8 possibilities.
 
 
 How to implement it on drone?
+1. Camera need to face downwards 
+    A mirror infront of camera to make it look downwards.
+    A clip is available on thingiverse, to attach mirror. Or you can 3D print it. Or just 
+    glue it with a glue gun.
+    But a cleaner way is to use a thingiverse file by Works-Of-Claye (Tello Mirror Clip).
 
+2. Algorithm (black line following)
+    Split the image from camera into three sections: Left, center and right
+    This is same method as line follower. 3 regions where we will detect black line.
+
+    If black line in the middle region: go forward
+    if black line in right region: rotate right
+    if black line in left region : rotate left
+
+    Because we are splitting our image into virtual IR sensors, we can
+    split them into as many as we want, say 5.
+    But then 2^5 = 32, are too many combinations to handle for a simple problem.
 
 '''
