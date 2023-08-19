@@ -4,6 +4,7 @@ The idea of Line Following Drone, comes from line follower robot.
 We will see how line follower robot works and how to implement 
 same methodology in the drone. 
 
+--------------------------------------------------------------------------
 First, let us check how line follower robot works:
 Let us assume we have an 3 IR sensors, which detect if line is black.
 We have 2^3 = 8 possibilities.
@@ -17,7 +18,7 @@ We have 2^3 = 8 possibilities.
 1  1  1    # stop, because not possible
 1  0  1    # stop, because not possible
 
-
+--------------------------------------------------------------------------
 How to implement it on drone?
 ROTATION
 1. Camera need to face downwards 
@@ -53,5 +54,35 @@ How to solve this?
 At every step we will try to find the center of the black line. And check where the drone is wrt this center.
 It the drone center is away from line center, we will try to add translation to the drone to match them.
 
+--------------------------------------------------------------------------------------
+We will use A4 sheets as our line
 
 '''
+
+import cv2
+
+def thresholding(img):
+    """
+    We will use HSV color space, because it is easier to find
+    colors in HSV color space.
+    """
+    hsv  = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+    
+
+
+
+
+cap = cv2.VideoCapture(0)
+while True:
+    _, img = cap.read()
+    img = cv2.resize(img, (480, 360))
+
+    # because using a mirror, image flipped vertically
+    # img = cv2.flip(img, 0)
+
+    thresholding(img)
+
+
+
+    cv2.imshow("Output", img)
+    cv2.waitKey(1)
