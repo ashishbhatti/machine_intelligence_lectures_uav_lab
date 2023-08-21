@@ -10,7 +10,7 @@ me.connect()
 print(me.get_battery())
 me.streamon()
 
-# cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(0)
 # cap.set(3, frameWidth)
 # cap.set(4, frameHeight)
 # cap.set(10,150)

@@ -67,6 +67,7 @@ def thresholding(img):
     colors in HSV color space.
     """
     hsv  = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+    # limits
     
 
 
