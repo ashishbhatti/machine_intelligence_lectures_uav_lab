@@ -60,6 +60,7 @@ We will use A4 sheets as our line
 '''
 
 import cv2
+import numpy as np
 hsvVals = [0, 0, 117, 179, 22, 219]
 
 def thresholding(img):
