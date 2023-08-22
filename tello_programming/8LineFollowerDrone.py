@@ -60,6 +60,7 @@ We will use A4 sheets as our line
 '''
 
 import cv2
+hsvVals = [0, 0, 117, 179, 22, 219]
 
 def thresholding(img):
     """
@@ -68,7 +69,11 @@ def thresholding(img):
     """
     hsv  = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
     # limits
-    
+    lower = np.array([hsvVals[0], hsvVals[1], hsvVals[2]])
+    upper = np.array([hsvVals[3], hsvVals[4], hsvVals[5]])
+    mask = cv2.inRange(hsv, lower, upper)                      # this image will only contain white path we need to follow, nothing else
+    return mask
+
 
 
 
@@ -81,9 +86,10 @@ while True:
     # because using a mirror, image flipped vertically
     # img = cv2.flip(img, 0)
 
-    thresholding(img)
+    imgThres = thresholding(img)
 
 
 
     cv2.imshow("Output", img)
+    cv2.imshow("Path", imgThres)
     cv2.waitKey(1)

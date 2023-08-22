@@ -5,10 +5,10 @@ import numpy as np
 frameWidth = 480
 frameHeight = 360
 
-me = tello.Tello()
-me.connect()
-print(me.get_battery())
-me.streamon()
+# me = tello.Tello()
+# me.connect()
+# print(me.get_battery())
+# me.streamon()
 
 cap = cv2.VideoCapture(0)
 # cap.set(3, frameWidth)
@@ -30,11 +30,11 @@ cv2.createTrackbar("VALUE Max", "HSV", 255, 255, empty)
 while True:
 
     # read frame
-    # _, img = cap.read()
-    img = me.get_frame_read().frame
+    _, img = cap.read()
+    # img = me.get_frame_read().frame
 
     img = cv2.resize(img, (frameWidth, frameHeight))
-    img = cv2.flip(img, 0)
+    # img = cv2.flip(img, 0)
     imgHsv = cv2.cvtColor(img,cv2.COLOR_BGR2HSV)
 
     h_min = cv2.getTrackbarPos("HUE Min","HSV")
