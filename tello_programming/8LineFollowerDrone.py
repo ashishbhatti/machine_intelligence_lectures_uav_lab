@@ -76,6 +76,21 @@ def thresholding(img):
     return mask
 
 
+def getContours(imgThres, img):
+    """
+    Draws bounding box around the thresholded region, 
+    to find the center point / line.
+
+    Args:
+        imgThres: image with thresholded region
+        img: image to draw bbox on
+    """
+    # contours are basically edges, in terms of points
+    contours, hierarchy = cv2.findContours(imgThres, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+    cv2.drawContours(img, contours, -1, (255,0,255), 7)
+    
+    # assuming biggest region is our path
+    # biggest = cv
 
 
 
@@ -88,6 +103,7 @@ while True:
     # img = cv2.flip(img, 0)
 
     imgThres = thresholding(img)
+    getContours(imgThres, img)
 
 
 
