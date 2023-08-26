@@ -87,6 +87,8 @@ def getContours(imgThres, img):
     """
     # contours are basically edges, in terms of points
     contours, hierarchy = cv2.findContours(imgThres, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+
+    # printing all the contours, to test
     cv2.drawContours(img, contours, -1, (255,0,255), 7)
     
     # assuming biggest region is our path
