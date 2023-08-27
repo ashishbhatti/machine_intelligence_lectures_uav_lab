@@ -62,6 +62,7 @@ We will use A4 sheets as our line
 import cv2
 import numpy as np
 hsvVals = [0, 0, 117, 179, 22, 219]
+sensors = 3
 
 def thresholding(img):
     """
@@ -87,12 +88,25 @@ def getContours(imgThres, img):
     """
     # contours are basically edges, in terms of points
     contours, hierarchy = cv2.findContours(imgThres, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
-
-    # printing all the contours, to test
-    cv2.drawContours(img, contours, -1, (255,0,255), 7)
-    
     # assuming biggest region is our path
-    # biggest = cv
+    biggest = max(contours, key = cv2.contourArea)
+    x,y,w,h = cv2.boundingRect(biggest)
+    cx = x + w // 2
+    cy = y + h // 2
+
+    # # printing all the contours, to test
+    # cv2.drawContours(img, contours, -1, (255,0,255), 7)
+
+    cv2.drawContours(img, biggest, -1, (255,0,255), 7)
+    cv2.circle(img, (cx,cy), 10, (0,255,0), cv2.FILLED)
+
+    return cx
+
+
+def getSensorOutput(imgThres, sensors):
+    imgs = np.hsplit(imgThres, sensors)                    # splitting the image into sensor regions
+    for x, im in enumerate(imgs):
+        cv2.imshow(str(x), im)
 
 
 
@@ -105,7 +119,8 @@ while True:
     # img = cv2.flip(img, 0)
 
     imgThres = thresholding(img)
-    getContours(imgThres, img)
+    cx = getContours(imgThres, img)                        # For translation
+    getSensorOutput(imgThres, sensors)
 
 
 
