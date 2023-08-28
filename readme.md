@@ -45,3 +45,12 @@ I hope you find this lecture series insightful and valuable in your journey to m
 
 ---
 *Disclaimer: This repository is for educational purposes and does not endorse any specific technologies or products.*
+
+## References
+1. [MIT 6.S191: Introduction to Deep Learning](IntroToDeepLearning.com)
+
+
+## Code Index
+1. Activation Functions
+2. Forward Pass
+
