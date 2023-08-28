@@ -63,6 +63,7 @@ import cv2
 import numpy as np
 hsvVals = [0, 0, 117, 179, 22, 219]
 sensors = 3
+thresholdR = 0.2                                           # Rotation threshold 20%
 
 def thresholding(img):
     """
@@ -105,8 +106,18 @@ def getContours(imgThres, img):
 
 def getSensorOutput(imgThres, sensors):
     imgs = np.hsplit(imgThres, sensors)                    # splitting the image into sensor regions
+    totalPixels = (img.shape[1] // sensors) * img.shape[0]
+    senOut = []
     for x, im in enumerate(imgs):
+        pixelCount = cv2.countNonZero(im)
+        if pixelCount > thresholdR * totalPixels:
+            senOut.append(1)
+        else:
+            senOut.append(0)
         cv2.imshow(str(x), im)
+
+    print (senOut)
+    return senOut
 
 
 
@@ -120,7 +131,7 @@ while True:
 
     imgThres = thresholding(img)
     cx = getContours(imgThres, img)                        # For translation
-    getSensorOutput(imgThres, sensors)
+    senOut = getSensorOutput(imgThres, sensors)
 
 
 
