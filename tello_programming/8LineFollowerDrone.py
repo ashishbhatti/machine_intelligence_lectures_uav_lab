@@ -61,12 +61,12 @@ We will use A4 sheets as our line
 
 import cv2
 import numpy as np
+
 hsvVals = [0, 0, 117, 179, 22, 219]
 sensors = 3
 thresholdR = 0.2                                           # Rotation threshold 20%
 width, height = 480, 360
 sensitivity = 3                                            # if number is high, less sensitive
-
 weights = [-25, -15, 0, 15, 25]
 curve = 0
 fSpeed = 15
@@ -106,7 +106,6 @@ def getContours(imgThres, img):
 
     cv2.drawContours(img, biggest, -1, (255,0,255), 7)
     cv2.circle(img, (cx,cy), 10, (0,255,0), cv2.FILLED)
-
     return cx
 
 
@@ -144,8 +143,6 @@ def sendCommands(senOut, cx):
     elif senOut == [1, 0, 1]: curve = weights[2]
 
     # me.send_rc_control(lr, fSpeed, 0, curve)
-
-
 
 
 cap = cv2.VideoCapture(0)
