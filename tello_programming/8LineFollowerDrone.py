@@ -54,13 +54,23 @@ How to solve this?
 At every step we will try to find the center of the black line. And check where the drone is wrt this center.
 It the drone center is away from line center, we will try to add translation to the drone to match them.
 
---------------------------------------------------------------------------------------
 We will use A4 sheets as our line
 
+--------------------------------------------------------------------------------------
 '''
 
+from djitellopy import tello
 import cv2
 import numpy as np
+
+me = tello.Tello()
+me.connect()              # this takes care of ip connections and communication
+print(me.get_battery())
+
+me.streamon()
+cap = cv2.VideoCapture(0)
+
+me.takeoff()
 
 hsvVals = [0, 0, 117, 179, 22, 219]
 sensors = 3
@@ -93,19 +103,21 @@ def getContours(imgThres, img):
         imgThres: image with thresholded region
         img: image to draw bbox on
     """
+    cx = 0
     # contours are basically edges, in terms of points
     contours, hierarchy = cv2.findContours(imgThres, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
     # assuming biggest region is our path
-    biggest = max(contours, key = cv2.contourArea)
-    x,y,w,h = cv2.boundingRect(biggest)
-    cx = x + w // 2
-    cy = y + h // 2
-
-    # # printing all the contours, to test
-    # cv2.drawContours(img, contours, -1, (255,0,255), 7)
-
-    cv2.drawContours(img, biggest, -1, (255,0,255), 7)
-    cv2.circle(img, (cx,cy), 10, (0,255,0), cv2.FILLED)
+    if len(contours) != 0:
+        biggest = max(contours, key = cv2.contourArea)
+        x,y,w,h = cv2.boundingRect(biggest)
+        cx = x + w // 2
+        cy = y + h // 2
+    
+        # # printing all the contours, to test
+        # cv2.drawContours(img, contours, -1, (255,0,255), 7)
+    
+        cv2.drawContours(img, biggest, -1, (255,0,255), 7)
+        cv2.circle(img, (cx,cy), 10, (0,255,0), cv2.FILLED)
     return cx
 
 
@@ -145,12 +157,12 @@ def sendCommands(senOut, cx):
     # me.send_rc_control(lr, fSpeed, 0, curve)
 
 
-cap = cv2.VideoCapture(0)
 while True:
-    _, img = cap.read()
+    # _, img = cap.read()
+    img = me.get_frame_read().frame
     img = cv2.resize(img, (width, height))
     # because using a mirror, image flipped vertically
-    # img = cv2.flip(img, 0)
+    img = cv2.flip(img, 0)
 
     imgThres = thresholding(img)
     cx = getContours(imgThres, img)                        # For translation
