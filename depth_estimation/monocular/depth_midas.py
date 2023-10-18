@@ -38,6 +38,12 @@ else:
 # Capturing from webcam using opencv
 cap = cv2.VideoCapture(0)
 
+# # Define the codec and create a VideoWriter object for MP4
+fourcc = cv2.VideoWriter_fourcc(*'MP4V')  # Codec for MP4 format
+out_frame = cv2.VideoWriter('output_frame.mp4', fourcc, 20.0, (640, 480))  # Output file for frame
+out_depth = cv2.VideoWriter('output_depth.mp4', fourcc, 20.0, (640, 480))  # Output file for depth map
+
+
 while cap.isOpened():
     success, frame = cap.read()    # Reading the frame
 
@@ -59,7 +65,7 @@ while cap.isOpened():
         ).squeeze()
         
         depth_map = prediction.cpu().numpy()
-        print(depth_map)
+        # print(depth_map)
 
     end = time.time()
     total_time = end - start
@@ -71,15 +77,23 @@ while cap.isOpened():
     depth_map = cv2.applyColorMap(depth_map, cv2.COLORMAP_MAGMA)
 
     cv2.putText(frame, f'FPS: {int(fps)}', (20,70), cv2.FONT_HERSHEY_SIMPLEX, 1.5, (0, 255, 0), 2)
-    cv2.imshow('CV2Frame', frame)          # Showing it to user 
-    cv2.imshow('Depth Map', depth_map)
     
+    # Write the frame and depth map to separate output video files
+    out_frame.write(frame)
+    out_depth.write(depth_map)
+    
+    # Display the frame and depth map
+    cv2.imshow('Frame', frame)
+    cv2.imshow('Depth Map', depth_map)
+
     # Viewing with matplot lib
     # plt.imshow(depth_map)
     # plt.pause(0.00001)
 
     if cv2.waitKey(10) & 0xFF == ord('q'):
         cap.release()
+        out_frame.release()
+        out_depth.release()
         cv2.destroyAllWindows()
         break
 
