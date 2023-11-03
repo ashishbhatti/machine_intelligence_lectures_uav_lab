@@ -61,6 +61,8 @@ I will chose to run face detection code on Jetson Nano as my first DL algorithm.
 
 ## Learning
 
+### Pre-requisites
+
 Consider going to this [Jetson AI Certification Programs](https://developer.nvidia.com/embedded/learn/jetson-ai-certification-programs#course_outline) webpage and check the learning resources. This might be helpful along the way. You can also consider pursuing the certification for a more organized learning path.
 
 Note that there are a few pre-requisites before you pursue the course. Take those seriously, don't think that you can learn a language and machine learning at the same time. Keep those two tasks separate.
@@ -73,7 +75,13 @@ The first video discusses very basic commands, and if you a familiar with linux 
 
 The second video touches basics of python, you don't have to watch this if you are familiar with the language. 
 
+### Getting Started
 
+Check the Nvidia Deep Learning Institute's course **[Getting Started with AI on Jetson Nano](https://courses.nvidia.com/courses/course-v1:DLI+S-RX-02+V2/)**.
+
+This course introduces a few important concepts. These are essential if you need to work with Jetson Nano. I am listing these here:
+1. Docker files
+2. Jupyter Lab 
 
 
 
