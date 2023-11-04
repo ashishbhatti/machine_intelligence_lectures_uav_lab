@@ -37,11 +37,22 @@ Follow closely this guide [Get Started With Jetson Nano Developer Kit](https://d
 
 For my case there was a problem with the Jetpack file I downloaded, from this guide. The boot screen got stuck. If you encounter the same issue, go to the [Jetpack Archive](https://developer.nvidia.com/embedded/jetpack-archive) and download an image supported for jetson nano. Rest of the steps are the same.
 
-I installed Jetpack 4.6.1.
+I installed Jetpack 4.6.1. (L4T 32.7.1)
 
 Note that there is another software called [DeepStream](https://developer.nvidia.com/deepstream-getting-started). We will talk about that once we are done with setting up our first app.
 
+**Why Jetpack? Should we not install a normal ubuntu or linux distro?** \
+Jetpack is an SDK (Software Development Kit) which aims to provide a full development environment for developing AI applications on Jetson Modules. 
+Take a look at what Jetpack contains:
+* L4T (Linux for Tegra) (aka Jetson Linux)
+  * Linux Kernel
+  * Bootloader
+  * NVIDIA drivers
+  * Flashing utilities
+  * Ubuntu Desktop Environment
+* Pre-installed libraries for accelerating AI development.
 
+So, to answer the question, for development it is best to use Jetpack.
 
 ## Installing the required packages
 
@@ -53,6 +64,9 @@ Now Jetpack already comes with most of the required packages pre-installed. Thes
 
 We will install the required packages along the way, being careful about the supported versions.
 
+Steps to install VSCode:
+1. Download the Arm64 .deb file from VSCode downloads page.
+2. Open the file with Software Install, and install it.
 
 ## Running your first algorithm
 
