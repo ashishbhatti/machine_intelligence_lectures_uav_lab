@@ -68,9 +68,14 @@ Steps to install VSCode:
 1. Download the Arm64 .deb file from VSCode downloads page.
 2. Open the file with Software Install, and install it.
 
-## Running your first algorithm
+## Running your first programs
 
-I will chose to run face detection code on Jetson Nano as my first DL algorithm. 
+Jetpack already has both python2 and python3 installed. You can tinker with normal python programs just to begin with. My suggested first few programs are:
+
+1. camera_test.py
+2. face_detection_tracking.py
+
+
 
 
 ## Learning
