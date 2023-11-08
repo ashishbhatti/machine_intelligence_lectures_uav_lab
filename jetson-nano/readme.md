@@ -1,5 +1,5 @@
 # Running your first DL algorithm on Jetson Nano
-This repository contains my documentation regarding beginning to use jetson nano and running your first algorithm. I have tried to list all the steps, and the roadblocks I encountered and how I solved those, along the way. Hope this helps!
+This repository contains my documentation regarding beginning to use jetson nano and running your first programs. I have tried to list all the steps, and the roadblocks I encountered and how I solved those, along the way. Hope this helps!
 
 ## Outline
 

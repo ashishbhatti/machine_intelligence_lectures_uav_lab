@@ -1,8 +1,13 @@
 # Machine Intelligence Lecture Series
 
+_If people aren't laughing at your dreams, your dreams aren't big enough._ 
+
+_The fear of death follows from the fear of life. One who lives life fully is prepared to die at any time. - Mark Twain_
+
 ![Machine Intelligence Lecture Series Banner](link_to_banner_image)
 
-Welcome to the Machine Intelligence Lecture Series. I had the priviledge of conducting this lecture series at the UAV Lab, Indian Institute of Technology Kanpur (IIT Kanpur). The aim of this series was to provide my teammates with an overview of various machine intelligence concepts and technologies. Throughout the series, I covered a range of topics, delving into both foundational principles and advanced applications.
+
+Welcome to the Machine Intelligence Lecture Series. I had the priviledge of conducting this lecture series at the UAV Lab, Indian Institute of Technology Kanpur (IIT Kanpur). The aim of this series was to provide my teammates with an overview of various Machine Intelligence concepts and technologies. Throughout the series, I covered a range of topics, delving into both foundational principles and advanced applications.
 
 ## Topics Covered
 
