@@ -74,7 +74,7 @@ Jetpack already has both python2 and python3 installed. You can tinker with norm
 
 1. camera_test.py
 2. face_detection_tracking.py
-
+3. gpio_test.py
 
 
 
