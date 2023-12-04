@@ -96,6 +96,12 @@ The second video touches basics of python, you don't have to watch this if you a
 
 ### Getting Started
 
+Once you have sufficient knowledge of linux command line and python, check [**Learn Computer Vision with Jetson Nano**](https://youtu.be/CRpW9wrRKx4?si=4HD_eAui6ny9qWGz) tutorial by Murtaza's Workshop Youtube Channel. This tutorial covers just the basics, but will familiarize you with the environment.
+
+
+
+
+
 Check the Nvidia Deep Learning Institute's course **[Getting Started with AI on Jetson Nano](https://courses.nvidia.com/courses/course-v1:DLI+S-RX-02+V2/)**.
 
 This course introduces a few important concepts. These are essential if you need to work with Jetson Nano. I am listing these here:
