@@ -1,3 +1,5 @@
 # .gitignore
-face_recognition/Attendence_Through_Face_Recognition/.idea/
-face_recognition/Attendence_Through_Face_Recognition/.venv/
+face_recognition/attendence_through_face_recognition/.idea/
+face_recognition/attendence_through_face_recognition/.venv/
+face_recognition/face_recognition_real_time_database/.idea/
+face_recognition/face_recognition_real_time_database/.venv/
