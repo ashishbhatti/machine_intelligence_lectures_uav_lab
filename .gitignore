@@ -3,3 +3,4 @@ face_recognition/attendence_through_face_recognition/.idea/
 face_recognition/attendence_through_face_recognition/.venv/
 face_recognition/face_recognition_real_time_database/.idea/
 face_recognition/face_recognition_real_time_database/.venv/
+face_recognition/face_recognition_real_time_database/serviceAccountKey.json
