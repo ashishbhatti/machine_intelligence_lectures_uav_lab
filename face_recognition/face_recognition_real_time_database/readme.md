@@ -2,7 +2,7 @@
 
 This project is based on [this tutorial](https://youtu.be/iBomaK2ARyI?si=MYhYFiHieqHx_lOr) by Murtaza's Workshop Youtube Channel.
 
-The project uses the `face_recognition` library, and the algorithm is explained in [this article](https://medium.com/@ageitgey/machine-learning-is-fun-part-4-modern-face-recognition-with-deep-learning-c3cffc121d78).
+The project uses the `face_recognition` library, and the algorithm is explained in [this article](https://medium.com/@ageitgey/machine-learning-is-fun-part-4-modern-face-recognition-with-deep-learning-c3cffc121d78). The library uses HOG descriptors.
 
 
 ### Instruction to run
