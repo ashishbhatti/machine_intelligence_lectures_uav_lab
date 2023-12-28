@@ -9,4 +9,14 @@ opencv understands.
 '''
 
 # create a network
-net = jetson.inference.detectNet
+net = jetson.inference.detectNet("ssd-mobilenet-v2", threshold = 0.5)
+
+# webcam
+cap = cv2.VideoCapture(0)
+cap.set(3,640)
+cap.set(4,480)
+
+while True:
+    success, img = cap.read()
+    cv2.imshow("Image", img)
+    cv2.waitKey(1)

@@ -34,3 +34,6 @@ You can skip pytorch installation, it is not required.
 - `project_test.py` : File to help us see how we can use this module in a different project.
 
 
+When you first run the `bare_min_test.py`, it will take several minutes to run. So, be patient.
+
+
