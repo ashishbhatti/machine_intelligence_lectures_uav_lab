@@ -27,6 +27,8 @@ $ ./download-models.sh
 
 You can skip pytorch installation, it is not required.
 
+If you face issue with the installation, check [this](https://github.com/dusty-nv/jetson-inference/blob/master/docs/building-repo.md).
+
 
 ### The file structure 
 - `bare_min_test.py` : Absolutely bare minimum code required to run object detection.
