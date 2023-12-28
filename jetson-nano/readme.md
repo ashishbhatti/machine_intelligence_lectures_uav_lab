@@ -100,12 +100,13 @@ The second video touches basics of python, you don't have to watch this if you a
 #### 1. Familiarity with Jetson Nano 
 Once you have completed the above two pre-requisites and/or have sufficient knowledge of linux command line and python, check [**Learn Computer Vision with Jetson Nano**](https://youtu.be/CRpW9wrRKx4?si=4HD_eAui6ny9qWGz) tutorial by Murtaza's Workshop Youtube Channel. 
 
-This tutorial covers just the basics, but will familiarize you with the environment. This uses [Viola-Jones Method](https://towardsdatascience.com/viola-jones-algorithm-and-haar-cascade-classifier-ee3bfb19f7d8) aka Haar-Cascade Classifier, to detect the objects. You will get an idea that how powerful just a simple algorithm can be. You will also learn about modules, which are tools in the hands of a software developer. Also try to complete the projects mentioned in the tutorial.
+This tutorial covers just the basics, but will familiarize you with the environment. This uses [Viola-Jones Method](https://towardsdatascience.com/viola-jones-algorithm-and-haar-cascade-classifier-ee3bfb19f7d8) aka Haar-Cascade Classifier, to detect the objects. You will get an idea that how powerful just a simple algorithm can be. You will also learn about modules, which are tools in the hands of a software developer. Also try to complete the projects mentioned in the tutorial. I have added my code for the same in `cv-implementation-jetson-nano` directory.
+
+#### 2. Running Real Time Object Detection using Jetson-Inference Tools
+Check [Real Time (24-FPS) Object Detection using Nvidia's Jetson Nano](https://youtu.be/mB025B7KpeE?si=Bu4KwqhsYs7fPRho) tutorial by Murtaza's Workshop Youtube Channel. This uses `jetson-inference` which is a library for real-time vision inference for Jetson Devices. This uses TensorRT to run optimized networks on GPU from cpp or python. It uses Pytorch for training models. This tutorial will give you a taste of what Jetson Nano is capable of, and how you can use the optimized models in your projects. I have added my implementation of the same in `real-time-object-detection-jetson-inference` directory. 
 
 
-
-
-#### 2. Nvidia Jetson Nano Course 
+#### 3. Nvidia Jetson Nano Course 
 Check the Nvidia Deep Learning Institute's course **[Getting Started with AI on Jetson Nano](https://courses.nvidia.com/courses/course-v1:DLI+S-RX-02+V2/)**.
 
 This course introduces a few important concepts. These are essential if you need to work with Jetson Nano. I am listing these here:
