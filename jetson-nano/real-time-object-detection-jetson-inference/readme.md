@@ -35,5 +35,3 @@ You can skip pytorch installation, it is not required.
 
 
 When you first run the `bare_min_test.py`, it will take several minutes to run. So, be patient.
-
-
