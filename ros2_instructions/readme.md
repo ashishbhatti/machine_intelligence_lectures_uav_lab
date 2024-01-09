@@ -193,6 +193,8 @@ You can write nodes in cpp and python, and both nodes can communicate with each 
 Two nodes can't have the same name. Hence, make sure all node names are unique.
 
 #### Writing your own node
+
+##### Where to create the file?
 ```
 # go to your package directory
 cd ~/ros2_ws/src/my_py_pkg
@@ -204,8 +206,18 @@ cd ./my_py_pkg
 touch my_first_node.py
 ```
 
-#### How to install your own node?
+##### What to write in the file?
+```
 
+```
+
+
+
+
+#### How to install your own node?
+##### Why to install your ros2 node?
+
+##### How to install?
 
 
 #### How to run your own node?
