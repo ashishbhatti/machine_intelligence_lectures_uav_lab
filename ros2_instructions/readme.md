@@ -371,9 +371,10 @@ Note that in the class definition of `MyNode`, we inherit from the `Node` class 
 Then in the constructor of the class, we call the constructor of the parent class with node name as argument, using: `super().__init__("py_test")`. We can also call `self.get_logger().info("Hello ROS2")` rather than with `node.` previously.
 
 But this is very basic, how to add more functionality?
+We will check that later, but first let us save the above node we have written as the node template.
 
 #### Node Template
-
+[Python node template]()
 
 
 
