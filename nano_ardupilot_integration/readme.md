@@ -74,7 +74,7 @@ The labs include:
 | 2 |     |     |
 | 3 |     |     |
 | 4 | Lab 4 | Flying your UAV in AirSim |
-| 5 |     |     |
+| 5 | Lab 5 | Offboard Control of Multirotor using PX4 |
 | 6 |     |     |
 | 7 |     |     |
 

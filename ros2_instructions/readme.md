@@ -208,25 +208,169 @@ touch my_first_node.py
 
 ##### What to write in the file?
 ```
+#!/usr/bin/env python3
 
+import rclpy
+from rclpy.node import Node
+
+def main(args=None):
+    rclpy.init(args=args)
+    node = Node("py_test")
+    node.get_logger().info("Hello ROS2")
+    rclpy.spin(node)
+    rclpy.shutdown()
+
+if __name__ == "__main__":
+    main()
+```
+\
+**explanation of the code in node file**
+
+`#!/usr/bin/env python3` 
+
+It is the interpreter line, aka shebang(`#!`) line. It is used in python scripts to specify the interpreter for execution of the script. This line is typically the first line in the script.
+
+General reasons for adding this line:
+- Portability: tells the system that the script should be run using whatever `python3` interpreter that appears `first` in the user's `$PATH` environment variable path. This makes the script portable across different systems.
+- Direct Execution: On Unix-based systems, this line allows you to run the python script as a standalone executable without explicitly calling python interpreter (i.e., you can use `./script.py` rather than `python3 script.py`)
+
+ROS2 reasons:
+- ROS2 only works with python3 and not with python2.
+
+\
+To allow the components of the file to be imported without execution of file, we write the following:
+```
+if __name__ == "__main__":
+    main()
+```
+
+We also want to take the optional arguments, which we later want to use, hence we define `def main(args=None)`.
+
+For using ros2 functionalities we `import rclpy`. If you remember we added the dependency to `rclpy`, in `package.xml` file as well.
+
+The first thing we do in our program is to initialize ros2 communication i.e., initialize rclpy and we pass the arguments from main: `rclpy.init(args = args)`. This is the first line we need to write in every ros2 program. Basically it starts ros2 communication, and if you try to use any ros2 feature without this line, it will fail.
+
+And the last line of the program in the main function is shutdown rclpy using `rclpy.shutdown()`. This line shuts down the communication.
+
+But notice we still haven't created a node in the file. Note this file in itself in not the node, we create a node inside this file. For this we import the Node class `from rclpy import Node`. Then after we have started the ros2 communication, we create a Node object by passing the node name as a parameter in Node constructor: `node = Node("py_test")`. This node name "py_test" can be different from the file. It is best practice, it is better not to use 'node' word in the name because it will be redundant.
+
+Now what will the node do? We can use this node to print (log) some info on console: `node.get_logger().info("Hello ROS2")`.
+
+When the shutdown statement runs, the ros2 communication is shut down and the program will exit. When the program exits your node goes out of scope. This means that the node is destroyed with everything created inside of it. To keep the node running (needed in some applications), before the shutdown statement, we use: `rclpy.spin(node)`. This function is very important, and you will use in almost all your programs. It will pause your program and will allow your node to stay alive.
+
+Node is not the file, or the executable. It is an entity created inside the file. The name of the node is not necessarily the name of the file.
+
+#### How to run the node?
+
+Before running we will mark the file as executable.
+```
+cd ~/ros2_ws/src/my_py_pkg/my_py_pkg
+chmod +x my_first_node.py
+```
+
+There are 4 methods to run the node:
+
+1. Using the python interpreter (most basic method, not used much). 
+```
+cd ~/ros2_ws/src/my_py_pkg/my_py_pkg
+
+python3 my_first_node.py
+```
+
+2. Running as a script (another basic method, not used)
+```
+cd ~/ros2_ws/src/my_py_pkg/my_py_pkg
+
+./my_first_node.py
+```
+
+3. Running the node from the install folder of ROS2 workspace. \
+For this method installation of the package is required. (Check the next section for the method to install the package.) This method is again not used much.
+```
+# go to location specified in setup.cfg file
+cd ~/ros2_ws/install/my_py_pkg/lib/my_py_pkg
+
+# just run the node using its executable
+./py_node
+```
+\
+The first 3 methods are either running the node directly from the file you created or by from the file you installed. We will not use any of these methods to run a node. We will use ROS2 command line tools.
+
+4. Running using the `ros2 run` command line\
+For this method as well installation is required. And enabling the execution of node using this method is the real reason for installation of the package.
+```
+ros2 run my_py_pkg py_node
+```
+
+Note that the syntax of running a node is:
+```
+ros2 run <package_name> <installed_node_executable>
 ```
 
 
 
+##### How to install your own node?
+We will install the node file using the `setup.py` script in the package folder. We add a line specifying file name in the `'console_scripts':[   ]`, key value pair in the `setup()` function. If we want to install other scripts as well, we put their names here. We add the file name as: 
+```
+setup(
+    entry_points={
+        'console_scripts':[
+            "py_node = my_py_pkg.my_first_node:main" 
+        ],
+    },
+)
+```
 
-#### How to install your own node?
-##### Why to install your ros2 node?
+Through this line: `py_node = my_py_pkg.my_first_node:main`, we specify the name of the executable of node (py_node), then specify the package and the node file. And then which function to start running from.
 
-##### How to install?
+The `setup.cfg` file will tell ros2 where to install the file. 
 
+```
+# go to ros2 workspace
+cd ~/ros2_ws
 
-#### How to run your own node?
+# build the package or entire workspace
+colcon build --packages_select my_py_pkg
 
+source ~/.bashrc
+```
+
+Performing these steps takes the node file and converts it into a ros2 executable, and installs it into the install folder of ros2 workspace directory. It also loads it in the current terminal.
+
+Now that we know how to create, install, and run a python node, let's see how to improve its structure using Object Oriented Programming. This is also the recommended way of writing the node.
 
 
 #### Improving your node with OOP
+This is the recommended way of writing the node by the ROS2 development team. This will help making your applications scalable.
 
+```
+#!/usr/bin/env python3
 
+import rclpy
+from rclpy.node import Node
+
+class MyNode(Node):
+    def __init__(self):
+        super().__init__("py_test")
+        self.get_logger().info("Hello ROS2")
+
+def main(args=None):
+    rclpy.init(args=args)
+    node = MyNode()
+    rclpy.spin(node)
+    rclpy.shutdown()
+
+if __name__ == "__main__":
+    main()
+```
+
+This program has the same functionality as `my_first_node.py` written above. Everything is same except rather than defining an instance of Node in the main function, we make a class which inherits from the Node class. We give name to this class depending on what it does (here `MyNode`). And all the fancy functionality or code we write as methods and attributes of the out `MyNode` class. Hence the `main()` function definintion and everything else remains as my `my_first_node.py`
+
+Note that in the class definition of `MyNode`, we inherit from the `Node` class imported from `rclpy.node`: `class MyNode(Node):`.
+
+Then in the constructor of the class, we call the constructor of the parent class with node name as argument, using: `super().__init__("py_test")`. We can also call `self.get_logger().info("Hello ROS2")` rather than with `node.` previously.
+
+But this is very basic, how to add more functionality?
 
 #### Node Template
 
