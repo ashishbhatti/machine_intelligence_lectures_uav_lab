@@ -364,7 +364,7 @@ if __name__ == "__main__":
     main()
 ```
 
-This program has the same functionality as `my_first_node.py` written above. Everything is same except rather than defining an instance of Node in the main function, we make a class which inherits from the Node class. We give name to this class depending on what it does (here `MyNode`). And all the fancy functionality or code we write as methods and attributes of the out `MyNode` class. Hence the `main()` function definintion and everything else remains as my `my_first_node.py`
+This program has the same functionality as `my_first_node.py` written above. Everything is same except rather than defining an instance of Node in the main function, we make a class which inherits from the Node class. We give name to this class depending on what it does (here `MyNode`). And all the fancy functionality or code we write, we do as methods and attributes of the out `MyNode` class. Hence the `main()` function definintion and everything else remains as my `my_first_node.py`
 
 Note that in the class definition of `MyNode`, we inherit from the `Node` class imported from `rclpy.node`: `class MyNode(Node):`.
 
@@ -423,6 +423,10 @@ def main(args=None):
 if __name__ == "__main__":
     main()
 ```
+
+Now that we can write code inside the custom node class, the `main()` function will remains same.
+
+### Recap Till Here
 
 
 
