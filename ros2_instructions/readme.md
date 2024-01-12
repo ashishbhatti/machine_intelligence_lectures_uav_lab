@@ -374,7 +374,57 @@ But this is very basic, how to add more functionality?
 We will check that later, but first let us save the above node we have written as the node template.
 
 #### Node Template
-[Python node template]()
+[Python node template](https://github.com/ashishbhatti/machine_intelligence_lectures_uav_lab/blob/main/ros2_instructions/template_python_node.py)
+
+
+#### Adding more functionality to node
+The above node does nothing, except for printing a log of Hello ROS2. Now let's implement one of the most basic and common functionality is ROS, which is a timer. Timer will allow you to call a function at a given rate. For example, you want to call a function at 10 Hz, then you use a timer.
+
+We will do that directly in the class we created. Before we create a timer, we need a callback function.
+
+```
+self.counter_ = 0 
+
+def timer_callback(self):
+    self.counter += 1
+    self.get_logger().info("Hello " + str(self.counter_))
+```
+Every time this function is called, it will print `Hello #`, where `#` is a number which increments each time the function is called.
+
+Now how to control, at what frequency this function is called? For this we can use a Node's `create_timer()` method.
+```
+self.create_time(<seconds_between_calls>, <callback_function>)
+```
+
+The entire code of the node file looks like this:
+```
+#!/usr/bin/env python3
+
+import rclpy
+from rclpy.node import Node
+
+class MyNode(Node):
+    def __init__(self):
+        super().__init__("py_test")
+        self.get_logger().info("Hello ROS2")
+        self.counter_ = 0
+        self.create_timer(0.5, self.timer_callback)
+    
+    def timer_callback(self):
+        self.counter_ += 1
+        self.get_logger().info("Hello " + str(self.counter_))
+
+def main(args=None):
+    rclpy.init(args=args)
+    node = MyNode()
+    rclpy.spin(node)
+    rclpy.shutdown()
+
+if __name__ == "__main__":
+    main()
+```
+
+
 
 
 
