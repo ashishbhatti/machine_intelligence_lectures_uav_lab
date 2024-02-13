@@ -10,7 +10,7 @@ This lecture is written from application perspective, rather than the theory per
 | S.No | Topic | Divisions |
 |---|---|---|
 |1| History | 1.1 Where does intelligence and learning come from? <br/> 1.2 How to model an artificial neuron after biological? |
-|2| Perceptron | 2.1 Mathematics <br/> 2.2 Forward pass and training <br/> 2.3 Activation functions |
+|2| A single neuron | 2.1 Mathematics <br/> 2.2 Forward pass and training <br/> 2.3 Activation functions |
 |3| Multi-layer perceptron and Feed Forward Neural Networks |  |
 |4| Problems associated with traditional deep learning and solutions |  |
 |5| Convolutional Neural Networks | 5.1 Images, how they are defined and created? <br/> 5.2 How are different pixels related and how to extract features? <br/> 5.3 What is a convolution? <br/> Through a project. <br/> 5.4 How to define a convolutional neural network? <br/> 5.5 How to train a convolutional network? <br/> 5.6 How to forward pass? <br/> 5.7 How to predict? <br/> 5.8 Why convolutional neural networks are not enough? Local relations not global. Only spatial relations not temporal. <br/> 5.9 Architecture of famous CNN network YOLO. <br/> 5.10 What are 3D convolutions? |
