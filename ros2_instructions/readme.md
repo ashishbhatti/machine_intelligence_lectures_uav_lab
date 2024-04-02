@@ -22,9 +22,35 @@ sudo apt install terminator
 ```
 
 
-## Installing ROS2 Humble
+## ROS2
 
-
+### Installation & Environment Setup
+```
 ```
 
+
+**add following line to ~/.bashrc**
 ```
+source /opt/ros/humble/setup.bash
+```
+
+
+### Create your own ROS2 Node
+To create your own ROS2 programs, you will need a build tool specific to ROS2, called `colcon`. This was created specifically for ROS2.
+
+```
+sudo apt install python3-colcon-common-extensions
+
+# add following line to ~/.bashrc
+source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash
+```
+
+### Creating a workspace
+```
+cd ~
+mkdir ros2_ws
+cd ros2_ws
+mkdir src
+```
+
+All the code and packages we create will be in the source code folder.
