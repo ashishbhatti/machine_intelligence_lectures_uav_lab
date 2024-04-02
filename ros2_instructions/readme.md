@@ -30,14 +30,38 @@ sudo apt install terminator
 ### Installation instructions & Environment Setup
 ROS2 installation docs -> Binary packages -> Ubuntu Linux - Jammy Jellyfish (22.04) -> [Debian packages](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html)
 
-### 
-```
-```
 
-
-**add following line to ~/.bashrc**
+**Remember to add following line to ~/.bashrc**
 ```
 source /opt/ros/humble/setup.bash
+```
+- `source` is a shell built-in command used to read and execute commands from a file in the current shell. When a script is run using source, any variables or functions it defines will remain available within the shell after the script completes.
+- `/opt/ros/humble/setup.bash` is the path to the setup script for ROS humble. Sourcing this script sets up the environment variables needed by ROS in that shell.
+
+`~/.bashrc` file is a script that runs every time you open a bash shell. It initializes an interactive shell session.You can put any command in this file that you can type the terminal.
+
+The above line is added to the end of `~/.bashrc` file so that it's run automatically every time you open a new terminal.
+
+### Running your first ROS2 program
+Once the environment has been set up, you can run ROS2 programs to check if everything works. This will also familiarize you with how to run ROS2 programs.
+
+For this we use existing example programs which are downloaded when you install ROS2.
+
+```
+# In one terminal, run talker node
+ros2 run demo_nodes_cpp talker
+
+# In another terminal, run listener node
+ros2 run demo_nodes_cpp listener
+```
+
+Each terminal runs a ROS2 program (aka node). Both the nodes are from `demo_nodes_cpp` package (a collection of nodes). 
+
+You must have noticed that both the programs run separately, and stopping one does not stop the other. Hence they are independent, even though the output of `listener` console depends on the output of `talker` console. This is because these independently running programs are communicating with each other. But how? We will learn this later.
+
+Syntax of running a ROS2 node is:
+```
+ros2 run <pkg_name> <node_name>
 ```
 
 
