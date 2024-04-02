@@ -69,18 +69,39 @@ ros2 run <pkg_name> <node_name>
 To create your own ROS2 programs, you will need a build tool specific to ROS2, called `colcon`. This was created specifically for ROS2.
 
 ```
+# to install the colcon build tool
 sudo apt install python3-colcon-common-extensions
 
-# add following line to ~/.bashrc
+# add following line to ~/.bashrc to enable autocomplete
 source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash
 ```
 
-### Creating a workspace
+### Creating and setting up ROS2 workspace
+#### What is a ROS2 workspace?
+It is basically a directory where you store all your code for a ROS2 application. It is also where you compile this code.
+
+#### How to create ROS2 workspace?
 ```
 cd ~
 mkdir ros2_ws
 cd ros2_ws
 mkdir src
 ```
+You can name your workspace directory anything (here `ros2_ws`). There is a convention in ROS community to name workspace directories with `_ws` ending.
 
-All the code and packages we create will be in the source code folder.
+In the workspace directory, you create an `src` directory. All the code and packages we create will be in this source code folder.
+
+#### How to build your workspace?
+To build your workspace, you can run the following from workspace directory.
+```
+colcon build
+```
+As there are no packages in the src folder yet, colcon will build with a message `Summary: 0 packages finished [time]`. This will create 3 more directories in the workspace directory: `build`, `install`, `log`.
+
+
+
+#### How to use your built packages?
+To use your own packages from your ros2 workspace, you need to source the setup scripts from the install directory of the workspace.
+
+### Creating a package
+
