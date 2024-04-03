@@ -121,7 +121,9 @@ source ~/ros2_ws/install/setup.bash
 
 
 ### Creating a package
+
 #### Why do we need a package?
+
 To create a ros2 node we need a package first. Packages allow you to separate your code into reusable blocks. Each package is an independent unit, which contains many different nodes.
 
 #### How to create a package?
@@ -172,5 +174,47 @@ colcon build --packages-select my_py_pkg
 The last command allows you to only compile the packages you made changes in, or the ones you want to test. So development time is much shorter.
 
 Your python package is now ready to house any python node.
+
+
+### Creating a Node
+
+#### What is a Node?
+It is a subpart (subprogram) of your application and it should have a single function. This means it is responsible for only one thing. You can think of it as a single file which contains code which has a single functionality.
+
+Nodes are combined into a graph. They communicate with each other through topics, services and parameters.
+
+#### Why do we need nodes?
+Nodes reduce code complexity. If you correctly separate your application in packages and nodes, then it will be much easier later to scale your application. If you write everything in one file, then after a stage you spend more time in debugging than in building new functionality.
+
+Nodes also make your system fault tolerant. If one node crashes, your entire application will not crash.
+
+You can write nodes in cpp and python, and both nodes can communicate with each other. Hence they make ros2 language agnostic. You can also use other languages. This means you can choose to develop your entire app in python, but some nodes in cpp because they need fast execution speed.
+
+Two nodes can't have the same name. Hence, make sure all node names are unique.
+
+#### Writing your own node
+```
+# go to your package directory
+cd ~/ros2_ws/src/my_py_pkg
+
+# go to nodes folder of package (same name as package)
+cd ./my_py_pkg
+
+# create your node file
+touch my_first_node.py
+```
+
+#### How to install your own node?
+
+
+#### How to run your own node?
+
+
+#### Improving your node with OOP
+
+#### Node Template
+
+
+
 
 
