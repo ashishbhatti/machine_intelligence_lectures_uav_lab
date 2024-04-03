@@ -207,10 +207,14 @@ touch my_first_node.py
 #### How to install your own node?
 
 
+
 #### How to run your own node?
 
 
+
 #### Improving your node with OOP
+
+
 
 #### Node Template
 
