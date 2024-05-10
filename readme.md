@@ -53,6 +53,7 @@ I hope you find this lecture series insightful and valuable in your journey to m
 ## References
 1. [MIT 6.S191: Introduction to Deep Learning](IntroToDeepLearning.com)
 2. [A Comprehensive guide to Motion Estimation with Optical Flow](https://nanonets.com/blog/optical-flow/)
+3. James, G.; Witten, D.; Hastie, T.; Tibshirani, R. & Taylor, J. (2023), An Introduction to Statistical Learning with Applications in Python , Springer , Cham.
 
 
 ## Code Index
